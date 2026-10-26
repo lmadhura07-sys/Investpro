@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Invest Pro</title>
+  <meta name="description" content="Investment App Sri Lanka">
+  <meta name="theme-color" content="#000000">
+  <meta name="background-color" content="#000000">
+  
+  <!-- PWA Manifest & Icons -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png">
+  <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="InvestPro">
+
+  <!-- EmailJS Browser SDK for Free Real Email OTP Delivery -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- Tailwind CSS CDN for modern responsive UI -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brandGreen: '#00A651',
+            brandGold: '#FFD700',
+            brandDark: '#121212',
+            brandCard: '#1E1E1E',
+            brandBlue: '#1976D2'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #121212;
+      color: #FFFFFF;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .tap-bounce:active {
+      transform: scale(0.97);
+    }
+    /* Hide scrollbar for clean app experience */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-brandDark text-white flex flex-col items-center">
+  <div id="app" class="w-full max-w-md min-h-screen flex flex-col bg-brandDark relative pb-20 shadow-2xl">
+    <!-- Dynamic Content Rendered Here via main.jsx / App -->
+    <div id="loading" class="flex flex-col items-center justify-center flex-1 p-6 text-center">
+      <div class="w-16 h-16 border-4 border-brandGreen border-t-transparent rounded-full animate-spin mb-4"></div>
+      <h2 class="text-xl font-bold tracking-tight">Invest Pro</h2>
+      <p class="text-sm text-gray-400 mt-1">Sri Lanka's Premier Investment Platform</p>
+    </div>
+  </div>
+
+  <!-- PWA Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then((reg) => console.log('[PWA] Service Worker registered with scope:', reg.scope))
+          .catch((err) => console.error('[PWA] Service Worker registration failed:', err));
+      });
+    }
+
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const installBtn = document.getElementById('pwa-install-banner');
+      if (installBtn) installBtn.classList.remove('hidden');
+    });
+  </script>
+
+  <!-- Firebase App, Auth & Firestore SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <!-- Main Application Script -->
+  <script type="module" src="/main.jsx"></script>
+</body>
+</html>

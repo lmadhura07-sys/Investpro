@@ -1,0 +1,6 @@
+{
+  "name": "InvestPro",
+  "description": "Smart savings goal app helping users save Rs. 500 monthly to reach Rs. 5,000 with sustainable bonuses, progress tracking, and instant withdrawals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
